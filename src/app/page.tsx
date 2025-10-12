@@ -58,7 +58,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
           href="/contact"
-          className={`${geistMono} rounded-lg bg-[#61AFEF] px-5 py-2 text-sm font-medium text-white transition hover:bg-[#2783CF]`}
+          className={`${geistMono} rounded-lg bg-[#2783CF] px-5 py-2 text-sm font-medium text-white transition hover:bg-[#2783CF]/50`}
         >
           Contact Me
         </Link>
