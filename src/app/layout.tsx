@@ -1,6 +1,6 @@
 import React from 'react';
 import './globals.css';
-import { hankenGrotesk, geistMono } from '@/ui/fonts';
+import { geistMono } from '@/ui/fonts';
 import { Home, Wrench, FolderOpen, Mail } from 'lucide-react';
 import Link from 'next/link';
 
@@ -16,11 +16,6 @@ export default function RootLayout({
       <body>
         <div className="flex min-h-screen">
           <aside className="fixed flex h-screen w-64 flex-col bg-[#2a2a2a] p-6 text-white">
-            <div
-              className={`${hankenGrotesk.className} mb-8 p-10 text-2xl font-bold`}
-            >
-              Illia Polovynko
-            </div>
             <nav className="flex flex-col gap-8">
               <Link href="/" className={linkStyle}>
                 <Home size={18} />
@@ -43,7 +38,11 @@ export default function RootLayout({
               © {new Date().getFullYear()}
             </div>
           </aside>
-          <main className="ml-64 flex-1 bg-[#212121] p-8">{children}</main>
+          <main className="ml-64 flex-1 bg-[#212121] p-8">
+            <div className="mx-auto max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-7xl">
+              {children}
+            </div>
+          </main>
         </div>
       </body>
     </html>
