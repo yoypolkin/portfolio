@@ -14,17 +14,12 @@ export default function Page() {
       <div className="mt-10">
         <div className="mt-10">
           <p className="mb-5 text-2xl font-bold text-white">Tools</p>
-          <div className="flex flex-wrap gap-8">
-            <div className="border-1 flex cursor-pointer flex-col items-center justify-between rounded-xl border-white/30 bg-[#2a2a2a] p-4 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-md hover:shadow-white/30">
-              <BadgeEuroIcon size={50} color="white" />
-              <p className="text-white">React</p>
-            </div>
-          </div>
+          <div className="flex flex-wrap gap-8"></div>
         </div>
         <div className="mt-10">
           <p className="mb-5 text-2xl font-bold text-white">Skills</p>
           <div className="flex gap-8">
-            <div className="border-1 flex cursor-pointer flex-col items-center justify-between rounded-xl border-white/30 bg-[#2a2a2a] p-4 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-md hover:shadow-white/30">
+            <div className="flex cursor-pointer flex-col items-center justify-between rounded-xl border border-white/20 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-sm hover:shadow-white/30">
               <BadgeEuroIcon size={50} color="white" />
               <p className="text-white">React</p>
             </div>
