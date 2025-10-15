@@ -1,7 +1,6 @@
 import React from 'react';
 import './globals.css';
 import NavLinks from '@/ui/nav-link';
-import Link from 'next/link';
 import { geistMono } from '@/ui/fonts';
 
 export default function RootLayout({
