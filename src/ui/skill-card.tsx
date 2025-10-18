@@ -1,5 +1,8 @@
+'use client';
+
 import SvgIcon from './svg-icon';
-import { geistMono } from './fonts';
+import { hankenGrotesk } from './fonts';
+import { useSearchParams } from 'next/navigation';
 
 interface ISkillCard {
   iconPath: string;
@@ -200,11 +203,33 @@ const tools: Array<ISkillCard> = [
 ];
 
 export default function SkillCards() {
-  return tools.map((tool) => {
+  const searchValue = useSearchParams().get('s');
+  let filteredTools: Array<ISkillCard> = tools;
+
+  if (searchValue) {
+    filteredTools = tools.filter((tool) =>
+      tool.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }
+
+  if (filteredTools.length === 0) {
+    return (
+      <div className="text-white">
+        <p className="mb-2">Whoops... Nothing to display</p>
+        <p className="mb-2">
+          Either I do not have this tool in my skillset or I forgot to include
+          it
+        </p>
+        <p>P.S. you could've made a typo :)</p>
+      </div>
+    );
+  }
+
+  return filteredTools.map((tool) => {
     return (
       <div
         key={tool.title}
-        className={`${geistMono.className} flex flex-col items-center justify-between gap-4 rounded-xl bg-white/5 p-4 transition-all hover:-translate-y-1 hover:scale-105 hover:bg-white/10`}
+        className={`${hankenGrotesk.className} flex flex-col items-center justify-between gap-4 rounded-xl bg-white/5 p-4 transition-all hover:-translate-y-1 hover:scale-105 hover:bg-white/10`}
       >
         <SvgIcon
           title={tool.title}
