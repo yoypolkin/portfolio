@@ -1,7 +1,7 @@
 import React from 'react';
 import './globals.css';
 import NavLinks from '@/ui/nav-link';
-import { geistMono } from '@/ui/fonts';
+// import { geistMono } from '@/ui/fonts';
 
 export default function RootLayout({
   children,
@@ -16,11 +16,11 @@ export default function RootLayout({
             <nav className="flex flex-col gap-8">
               <NavLinks></NavLinks>
             </nav>
-            <button
+            {/* <button
               className={`${geistMono} mt-auto rounded-lg bg-[#2783CF] px-5 py-2 text-sm font-medium text-white transition hover:bg-[#2783CF]/50`}
             >
               Download CV
-            </button>
+            </button> */}
           </aside>
 
           <main className="flex-1 bg-[#212121] p-8 md:ml-64">
