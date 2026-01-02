@@ -7,8 +7,36 @@ import { socialLinksData } from '@/data/social-links-data';
 const fontFamily = hankenGrotesk.className;
 
 export default function Page() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Illia Polovynko',
+    url: 'https://yoypolkin.com',
+    jobTitle: 'Senior Automation QA Engineer',
+    description:
+      'Senior SDET specializing in test automation, TypeScript, Playwright, CI/CD, and cloud infrastructure',
+    knowsAbout: [
+      'TypeScript',
+      'Playwright',
+      'Test Automation',
+      'CI/CD',
+      'Cloud Infrastructure',
+      'Docker',
+      'Kubernetes',
+      'Quality Assurance',
+    ],
+    sameAs: [
+      'https://github.com/yoypolkin',
+      'https://linkedin.com/in/illia-polovynko',
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="relative aspect-[4/1] w-full rounded-xl">
         <Image
           src="/main-bg.png"
