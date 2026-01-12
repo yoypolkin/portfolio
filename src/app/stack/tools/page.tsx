@@ -2,8 +2,11 @@ import SkillCards from '@/ui/skill-card';
 import SearchBar from '@/ui/search';
 import { hankenGrotesk } from '@/ui/fonts';
 import { Suspense } from 'react';
+import { getTools } from '@/data/tools';
 
-export default function ToolsPage() {
+export default async function ToolsPage() {
+  const tools = await getTools();
+
   return (
     <Suspense fallback={<div className="text-white">Loading tools...</div>}>
       <SearchBar searchText="Search for tools..." />
@@ -11,7 +14,7 @@ export default function ToolsPage() {
         <div className="mt-10">
           <p className="mb-5 text-2xl font-bold text-white">Tools</p>
           <div className="flex flex-wrap gap-8">
-            <SkillCards />
+            <SkillCards tools={tools} />
           </div>
         </div>
       </div>

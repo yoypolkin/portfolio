@@ -6,153 +6,35 @@ import { useState } from 'react';
 import SearchBar from '@/ui/search';
 import { useSearchParams } from 'next/navigation';
 
-interface ISkillSection {
+type Skill = {
   id: string;
   title: string;
-  skills: Array<ISkills>;
-}
-
-interface ISkills {
-  title: string;
   description: string;
-}
+  order: number;
+};
 
-const skillSections: Array<ISkillSection> = [
-  {
-    id: 'automation',
-    title: '🧭 Automation & Engineering',
-    skills: [
-      {
-        title: 'Automation Framework Setup',
-        description:
-          'Building scalable UI, API, and mobile automation frameworks from scratch with modern tools.',
-      },
-      {
-        title: 'Test Architecture Design',
-        description:
-          'Structuring robust, maintainable automation solutions with clean code principles.',
-      },
-      {
-        title: 'Regression & Smoke Testing',
-        description:
-          'Implementing fast, stable test suites for continuous delivery.',
-      },
-      {
-        title: 'Cross-functional Collaboration',
-        description:
-          'Working closely with dev and product teams to align testing with real business needs.',
-      },
-    ],
-  },
-  {
-    id: 'infra',
-    title: '🧰 Infrastructure & CI/CD',
-    skills: [
-      {
-        title: 'CI/CD Integration',
-        description:
-          'Connecting automation with pipelines (Jenkins, GitHub Actions) for smooth delivery.',
-      },
-      {
-        title: 'Containerized Test Environments',
-        description:
-          'Using Docker and cloud infrastructure to run tests at scale.',
-      },
-      {
-        title: 'Custom Reporting & Metrics',
-        description:
-          'Creating dashboards and reports for visibility into test health and coverage.',
-      },
-      {
-        title: 'Cloud Integration',
-        description:
-          'Running distributed test suites on GCP and other environments.',
-      },
-    ],
-  },
-  {
-    id: 'qa',
-    title: '🧪 Quality & Test',
-    skills: [
-      {
-        title: 'Test Strategy & Planning',
-        description: 'Designing test approaches that scale with the product.',
-      },
-      {
-        title: 'Test Estimation & Risk Analysis',
-        description:
-          'Identifying risks early and ensuring realistic delivery timelines.',
-      },
-      {
-        title: 'Documentation & Process Setup',
-        description: 'Creating clear processes and knowledge bases for teams.',
-      },
-      {
-        title: 'Mentorship & Leadership',
-        description:
-          'Supporting team growth through guidance, reviews, and shared best practices.',
-      },
-    ],
-  },
-  {
-    id: 'tech',
-    title: '🧑‍💻 Technical Proficiency',
-    skills: [
-      {
-        title: 'JavaScript / TypeScript',
-        description: 'Main languages for automation and tooling.',
-      },
-      {
-        title: 'Automation Tools',
-        description:
-          'Nightwatch, Cypress, Selenium, Appium, WebdriverIO, Mocha.',
-      },
-      {
-        title: 'Version Control',
-        description: 'Git, GitHub, Jira for collaboration and tracking.',
-      },
-      {
-        title: 'API Testing',
-        description: 'Postman and custom frameworks for REST API verification.',
-      },
-    ],
-  },
-  {
-    id: 'soft_skills',
-    title: '🧭 Soft Skills & Domain Experience',
-    skills: [
-      {
-        title: 'Problem Solving',
-        description:
-          'Identifying bottlenecks and engineering effective solutions.',
-      },
-      {
-        title: 'Client Communication',
-        description: 'Translating technical details into clear business value.',
-      },
-      {
-        title: 'Knowledge Sharing',
-        description: 'Conducting training and QA process onboarding.',
-      },
-      {
-        title: 'Domain Expertise',
-        description:
-          'SaaS and healthcare projects, long-term product delivery.',
-      },
-    ],
-  },
-];
+type SkillSection = {
+  id: string;
+  slug: string;
+  title: string;
+  order: number;
+  skills: Skill[];
+};
 
-export default function SkillSectionClient() {
+export default function SkillSectionClient({
+  skillSections,
+}: {
+  skillSections: SkillSection[];
+}) {
   const [openSection, setOpenSection] = useState<string | null>();
   const searchValue = useSearchParams().get('s')?.toLowerCase();
 
   const filteredSkills = searchValue
     ? skillSections
-        .map((skillSection: ISkillSection) => {
+        .map((skillSection: SkillSection) => {
           return {
             ...skillSection,
-            skills: skillSection.skills.filter((skill: ISkills) => {
+            skills: skillSection.skills.filter((skill: Skill) => {
               return (
                 skill.title.toLowerCase().includes(searchValue) ||
                 skill.description.toLowerCase().includes(searchValue)
@@ -160,7 +42,7 @@ export default function SkillSectionClient() {
             }),
           };
         })
-        .filter((section: ISkillSection) => {
+        .filter((section: SkillSection) => {
           return (
             section.skills.length > 0 ||
             section.title.toLowerCase().includes(searchValue)

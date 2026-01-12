@@ -3,10 +3,17 @@
 import { hankenGrotesk } from '@/ui/fonts';
 import { X } from 'lucide-react';
 
+type StoryItemType = 'ACTION' | 'RESULT';
+
+interface ExperienceStoryItem {
+  type: StoryItemType;
+  order: number;
+  text: string;
+}
+
 interface ExperienceStory {
   problem: string;
-  actions: Array<string>;
-  results: Array<string>;
+  items: ExperienceStoryItem[];
 }
 
 interface ExperienceModalProps {
@@ -15,7 +22,7 @@ interface ExperienceModalProps {
   projectTitle: string;
   period: string;
   company: string;
-  story: ExperienceStory;
+  story: ExperienceStory | null;
 }
 
 export default function ExperienceModal({
@@ -26,7 +33,17 @@ export default function ExperienceModal({
   company,
   story,
 }: ExperienceModalProps) {
-  if (!isOpen) return null;
+  if (!isOpen || !story) return null;
+
+  const actions = story.items
+    .filter((i) => i.type === 'ACTION')
+    .sort((a, b) => a.order - b.order)
+    .map((i) => i.text);
+
+  const results = story.items
+    .filter((i) => i.type === 'RESULT')
+    .sort((a, b) => a.order - b.order)
+    .map((i) => i.text);
 
   return (
     <div
@@ -63,7 +80,7 @@ export default function ExperienceModal({
             ⚡ What I Did
           </h3>
           <ul className="space-y-2">
-            {story.actions.map((action, i) => (
+            {actions.map((action, i) => (
               <li key={i} className="flex gap-3 leading-relaxed text-white/80">
                 <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2783CF]"></span>
                 <span>{action}</span>
@@ -77,7 +94,7 @@ export default function ExperienceModal({
             ✨ Results & Impact
           </h3>
           <ul className="space-y-2">
-            {story.results.map((result, i) => (
+            {results.map((result, i) => (
               <li key={i} className="flex gap-3 leading-relaxed text-white/80">
                 <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2783CF]"></span>
                 <span>{result}</span>
